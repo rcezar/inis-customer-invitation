@@ -30,7 +30,7 @@ public class CustomerInvitationTest {
         CustomerInvitation customerInvitation = new CustomerInvitation();
         try {
             List<Customer> customerList = customerInvitation.printCustomerInvitationList("file.txt");
-            Assert.assertEquals(customerList.get(0).getId().intValue(), 1);
+            Assert.assertEquals(customerList.get(0).getId().intValue(), 4);
 
         } catch (FileNotFoundException e) {
         	Assert.fail();

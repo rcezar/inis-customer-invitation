@@ -18,7 +18,7 @@ public class CustomerInvitation {
 
     private static String DO_LATITUDE = "53.339428";
     private static String DO_LONGITUDE = "-6.257664";
-    private static BigDecimal MAX = new BigDecimal("314");
+    private static BigDecimal MAX_RANGE = new BigDecimal("100");
 
     public static void main(String[] args) throws FileNotFoundException {
 
@@ -48,7 +48,7 @@ public class CustomerInvitation {
 
     private List<Customer> findValidCustomersFromList(List<Customer> rawCustomerList) {
 
-    	Address fromDublinOffice = new Address(DO_LATITUDE, DO_LONGITUDE);
+    	Address fromDublinOffice = new Address(DO_LATITUDE, DO_LONGITUDE);    	
     	
         List<Customer> validCustomerList = new ArrayList<Customer>();
         
@@ -56,7 +56,7 @@ public class CustomerInvitation {
         	
         	BigDecimal distance = c.calculate(fromDublinOffice);
             
-            if (distance.compareTo(MAX) <= 0) {
+            if (MAX_RANGE.compareTo(distance) >= 0) {
             	validCustomerList.add(c);
             }
         }

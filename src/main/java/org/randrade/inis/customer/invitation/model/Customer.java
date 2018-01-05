@@ -37,5 +37,12 @@ public class Customer {
     	
     	return address.calculateDistance(origem);
     }
+
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", name=" + name + ", address=" + address + "]";
+	}
+    
+    
     
 }

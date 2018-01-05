@@ -46,4 +46,9 @@ public class Address {
 
 	}
 
+	@Override
+	public String toString() {
+		return "Address [latitude=" + latitude + ", longitude=" + longitude + "]";
+	}
+	
 }
