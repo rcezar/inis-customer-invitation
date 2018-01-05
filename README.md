@@ -1,1 +1,1 @@
-# inis-customer-invitation
+# inis-customer-invitation project
