@@ -1,14 +1,13 @@
 package org.randrade.inis.customer.invitation;
 
-import com.google.gson.JsonSyntaxException;
-import org.junit.Test;
-import org.randrade.inis.customer.invitation.model.Customer;
-
 import java.io.FileNotFoundException;
 import java.util.List;
 
-import static junit.framework.Assert.*;
+import org.junit.Assert;
+import org.junit.Test;
+import org.randrade.inis.customer.invitation.model.Customer;
 
+import com.google.gson.JsonSyntaxException;
 
 public class CustomerInvitationTest {
 
@@ -18,10 +17,10 @@ public class CustomerInvitationTest {
         CustomerInvitation customerInvitation = new CustomerInvitation();
         try {
             List<Customer> customerList = customerInvitation.printCustomerInvitationList("file.txt");
-            assertEquals(customerList.size(), 2);
+            Assert.assertEquals(customerList.size(), 2);
 
         } catch (FileNotFoundException e) {
-            fail();
+        	Assert.fail();
         }
     }
 
@@ -31,10 +30,10 @@ public class CustomerInvitationTest {
         CustomerInvitation customerInvitation = new CustomerInvitation();
         try {
             List<Customer> customerList = customerInvitation.printCustomerInvitationList("file.txt");
-            assertEquals(customerList.get(0).getId().intValue(), 1);
+            Assert.assertEquals(customerList.get(0).getId().intValue(), 1);
 
         } catch (FileNotFoundException e) {
-            fail();
+        	Assert.fail();
         }
     }
 
@@ -58,6 +57,6 @@ public class CustomerInvitationTest {
         CustomerInvitation customerInvitation = new CustomerInvitation();
         List<Customer> customerList = customerInvitation.printCustomerInvitationList("file-empty.txt");
 
-        assertNull(customerList);
+        Assert.assertNull(customerList);
     }
 }

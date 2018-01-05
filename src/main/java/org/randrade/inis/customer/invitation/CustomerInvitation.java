@@ -2,6 +2,8 @@ package org.randrade.inis.customer.invitation;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import org.randrade.inis.customer.invitation.model.Address;
 import org.randrade.inis.customer.invitation.model.Customer;
 
 
@@ -32,7 +34,7 @@ public class CustomerInvitation {
 
             List<Customer> validCustomerList = findValidCustomersFromList(rawCustomerList);
 
-            sortById(validCustomerList);
+            sortById(validCustomerList);           
 
             Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
@@ -46,21 +48,22 @@ public class CustomerInvitation {
 
     private List<Customer> findValidCustomersFromList(List<Customer> rawCustomerList) {
 
+    	Address fromDublinOffice = new Address(DO_LATITUDE, DO_LONGITUDE);
+    	
         List<Customer> validCustomerList = new ArrayList<Customer>();
-
-        double latB = Double.parseDouble(DO_LATITUDE);
-        double lonB = Double.parseDouble(DO_LONGITUDE);
-
+        
         for (Customer c : rawCustomerList) {
-            c.calculateDistance(latB, lonB);
-            if (c.getDistance().compareTo(MAX) <= 0) {
-                validCustomerList.add(c);
+        	
+        	BigDecimal distance = c.calculate(fromDublinOffice);
+            
+            if (distance.compareTo(MAX) <= 0) {
+            	validCustomerList.add(c);
             }
         }
 
         return validCustomerList;
     }
-
+    		
     private void sortById(List<Customer> validCustomerList) {
 
         Collections.sort(validCustomerList, new Comparator<Customer>() {
@@ -68,7 +71,8 @@ public class CustomerInvitation {
                 return o1.getId().compareTo(o2.getId());
             }
         });
-    }
+    }   
+  
 
     private List<Customer> readCustomerListFromJSONFile(String filename) throws FileNotFoundException {
 
